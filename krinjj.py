@@ -40,7 +40,7 @@ class Bimzzx(threading.Thread):
 
 if __name__ == '__main__':
     try:
-        for x in range(threads):
+        for x in range(150):
             extrash = Bimzzx()
             extrash.start()
             time.sleep(0.1)
